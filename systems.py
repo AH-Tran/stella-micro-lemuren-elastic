@@ -108,8 +108,10 @@ class Ranker(object):
 
         self.es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
         #self.documents_path = './data/livivo/documents'
-        self.documents_path = './data/livivo/documents'
+        #self.documents_path = './data/livivo/documents'
         #self.documents_path = './data/preprocessed_docs/*'
+        
+        self.documents_path = '/data/livivo/documents'
 
     def test(self):
         return self.es.info(), 200
