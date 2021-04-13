@@ -1,0 +1,48 @@
+{
+            "query": {
+                "bool": {
+                    "should": [{
+                        "query_string": {
+                            "query": "query_raw",
+                            "fields": ["TITLE_EN","TITLE_GER","ABSTRACT","TITLE.analysis^3"],
+                            "analyzer": "query_analyzer",
+                            "fuzzy_transpositions": true,
+                            "fuzziness": "AUTO",
+                            "fuzzy_max_expansions": "5",
+                            "fuzzy_prefix_length": "0"
+                        }
+                    },
+
+                        {
+                            "query_string": {
+                                "query": "query_tokenized_eng",
+                                "fields": ["TITLE_EN^2","ABSTRACT","TITLE.analysis^3"],
+                                "analyzer": "query_analyzer",
+                                "fuzzy_transpositions": true,
+                                "fuzziness": "AUTO",
+                                "fuzzy_max_expansions": "5",
+                                "fuzzy_prefix_length": "0"
+                            }
+                        },
+                        {
+                            "query_string": {
+                                "query": "query_tokenized_german",
+                                "fields": ["TITLE_GER^2","ABSTRACT"],
+                                "analyzer": "german_analyzer",
+                                "fuzzy_transpositions": true,
+                                "fuzziness": "AUTO",
+                                "fuzzy_max_expansions": "5",
+                                "fuzzy_prefix_length": "0"
+                            }
+                        },
+                        {
+                            "query_string": {
+                                "query": "query_raw",
+                                "fields": ["TITLE.keyword^10"],
+                                "minimum_should_match": "75%"
+                            }
+                        }
+                    ]
+                }
+            }
+}
